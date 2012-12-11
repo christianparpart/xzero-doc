@@ -10,7 +10,7 @@ Main features include:
 - JSON API for retrieving state, stats, and reconfiguring clusters at runtime (including adding/updating/removing backends).
 - Client side routing support.
 - Sticky offline mode.
-- Road Warrior Reverse Proxying (basic proxying to a single w/o load balancing and health checks).
+- Road Warrior Reverse Proxying (basic proxying to a single backend without load balancing, health checks, etc).
 
 ### Setup API
 
