@@ -12,11 +12,13 @@ Main features include:
 - Sticky offline mode.
 - Road Warrior Reverse Proxying (basic proxying to a single w/o load balancing and health checks).
 
-### director.create(name, backend1\_name => url [, backend2\_name => url, ...])
+### Setup API
+
+#### director.create(name, backend1\_name => url [, backend2\_name => url, ...])
 
 Statically spawns a load balancer by given unique `name`. This one cannot be configured at runtime.
 
-### director.load(name1 => directoryPath1, ...)
+#### director.load(name1 => directoryPath1, ...)
 
 Spawns a load balancer with given identifier `name1` and its configuration stored ad `directoryPath1`.
 Multiple load balancers can be passed to one `directory.load()` invokation, as well as
@@ -24,7 +26,9 @@ this function can be invoked just multiple times.
 
 A load balancer identifier must be unique and the backend path should also be unique.
 
-### handler director.api()
+### Handler API
+
+#### director.api()
 
 A request handler, to provide the client with a JSON API to inspect the current load balancer states, their statistics, as well as allowing you to actually
 reconfigure specific backends.
@@ -33,7 +37,7 @@ Statically spawned clusters may only enable/disable backends, but dynamically sp
 having them removed again.  Dynamic cluster configuration is also kept on local storage and is kept in sync with the live configuration's changes.
 
 
-### handler director.pass(identifier)
+#### director.pass(identifier)
 
 Passes the request to the director by given name.  This is usually what you are to use in your configuration file.
 
@@ -41,7 +45,7 @@ Passes the request to the director by given name.  This is usually what you are 
         director.pass 'app-cluster'
     }
 
-### handler director.pass(identifier, backend)
+#### director.pass(identifier, backend)
 
 Passes the request to a specific backend on the given director.  Use this to allow clients to decide (for example via cookie or request-header) what backend is
 to server that request, which should help you testing code on a single backend before rolling out the backend's code change on the full cluster.
@@ -54,7 +58,7 @@ Please note, that explicitely specifying a backend does ignore any configured ca
         director.pass 'app-cluster', req.cookie('X-Backend')
     }
 
-### handler director.fcgi('address' => IP, 'port' => port)
+#### director.fcgi('address' => IP, 'port' => port)
 
 Directly passes the request to a *FastCGI* backend server on given `address:port` without any load-balancing or queueing features.
 
@@ -62,7 +66,7 @@ Directly passes the request to a *FastCGI* backend server on given `address:port
         director.fcgi 'address' => 127.0.0.1, 'port' => 9000
     }
 
-### handler director.http('address' => IP, 'port' => port)
+#### director.http('address' => IP, 'port' => port)
 
 Directly passes the request to a *HTTP* backend server on given `address:port` without any load-balancing or queueing features.
 
