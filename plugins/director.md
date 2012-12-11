@@ -3,6 +3,7 @@
 The director plugin is the load balancer and reverse proxy for x0.
 
 Main features include:
+
 - Supporting different backend protocols (HTTP and FastCGI).
 - Supporting different transport protocols (TCP over IPv4 and IPv6, and UNIX Domain Sockets).
 - Advanced health monitoring.
@@ -36,11 +37,9 @@ having them removed again.  Dynamic cluster configuration is also kept on local 
 
 Passes the request to the director by given name.  This is usually what you are to use in your configuration file.
 
-````
-handler main {
-    director.pass 'app-cluster'
-}
-````
+    handler main {
+        director.pass 'app-cluster'
+    }
 
 ### handler director.pass(identifier, backend)
 
@@ -51,8 +50,6 @@ If the specified backend is not available, a 503 (Service Unavailable) response 
 
 Please note, that explicitely specifying a backend does ignore any configured capacity limits.
 
-````
-handler main {
-    director.pass 'app-cluster', req.cookie('X-Backend')
-}
-````
+    handler main {
+        director.pass 'app-cluster', req.cookie('X-Backend')
+    }
