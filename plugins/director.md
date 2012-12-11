@@ -53,3 +53,20 @@ Please note, that explicitely specifying a backend does ignore any configured ca
     handler main {
         director.pass 'app-cluster', req.cookie('X-Backend')
     }
+
+### handler director.fcgi('address' => IP, 'port' => port)
+
+Directly passes the request to a *FastCGI* backend server on given `address:port` without any load-balancing or queueing features.
+
+    handler main {
+        director.fcgi 'address' => 127.0.0.1, 'port' => 9000
+    }
+
+### handler director.http('address' => IP, 'port' => port)
+
+Directly passes the request to a *HTTP* backend server on given `address:port` without any load-balancing or queueing features.
+
+    handler main {
+        director.http 'address' => 127.0.0.1, 'port' => 3000
+    }
+
