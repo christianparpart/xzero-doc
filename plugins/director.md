@@ -74,3 +74,41 @@ Directly passes the request to a *HTTP* backend server on given `address:port` w
         director.http 'address' => 127.0.0.1, 'port' => 3000
     }
 
+### JSON API
+
+The JSON API allows you to modify your existing cluster, such as enabling/disabling backends,
+reconfiguring their capacity, timeouts or health checks.
+
+You can also configure the scheduling buckets.
+
+#### Creating a new Backend
+
+    curl -v -X PUT http://localhost:8080/x0/director/app_cluster \
+         --data 'name=app3105' \
+                '&role=active' \
+                '&enabled=true' \
+                '&capacity=16' \
+                '&protocol=http' \              # either "http" or "fastcgi"
+                '&hostname=127.0.0.1' \
+                '&port=3105' \
+                '&health-check-interval=5000' \
+                '&health-check-mode=paranoid
+
+#### Updating a Backend
+
+    curl -v -X POST http://localhost:8080/x0/director/app_cluster/app3105 \
+         --data '...'
+
+#### Deleting a Backend
+
+    curl -v -X DELETE http://localhost:8080/x0/director/app_cluster/app3105
+
+### Creating a new Bucket
+
+    ...
+
+### Updating a Bucket
+
+    ...
+
+### Deleting a Bucket
